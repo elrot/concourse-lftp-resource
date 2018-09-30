@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+exec 3>&1 # make stdout available as fd 3 for the result
+exec 1>&2 # redirect all output to stderr for logging
+
+source $(dirname $0)/common.sh
+
+PAYLOAD=$(mktemp /tmp/resource-check.XXXXXX)
+
+cat > "$PAYLOAD" <&0
+
+parse_source_config
+
+if [ -z "$VERSION" ]; then
+  echo '[]' >&3
+else
+  jq -n "[
+    { timestamp: \"$VERSION\" }
+  ]" >&3
+fi
