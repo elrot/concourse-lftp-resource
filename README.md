@@ -6,6 +6,14 @@ A simple Concourse CI resource to upload files to remote FTP server with lftp.
 
 * `url`: URL of the remote server, directory listing must be enabled. Should include credentials if required.
 
+## Behaviour
+
+Push all files from `params.path` to specified FTP server 
+
+```
+lftp -c "open $URL; mirror -v -R $SOURCE_DIR/$RELATIVE_DIR . ;"
+```
+
 
 ## Example
 
@@ -35,4 +43,5 @@ jobs:
     params:
       path: my-binaries/
 ```
+
 
