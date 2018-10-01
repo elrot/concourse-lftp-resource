@@ -17,6 +17,6 @@ if [ -z "$VERSION" ]; then
   echo '[]' >&3
 else
   jq -n "[
-    { timestamp: \"$VERSION\" }
+    { time: \"$VERSION\" }
   ]" >&3
 fi

@@ -7,8 +7,6 @@ exec 1>&2 # redirect all output to stderr for logging
 
 source $(dirname $0)/common.sh
 
-TIMESTAMP="$(jq -n "{version:{timestamp:\"$(date -Iseconds)\"}}")"
-
 PAYLOAD=$(mktemp /tmp/resource-out.XXXXXX)
 
 cat > "$PAYLOAD" <&0
@@ -16,9 +14,11 @@ cat > "$PAYLOAD" <&0
 parse_source_config
 parse_out_params
 
+VERSION="$(jq -n "{version:{time:\"$(date -Iseconds)\"}}")"
+
 SOURCE_DIR=$1
 cd $SOURCE_DIR
 
 lftp -c "open $URL; mirror -v -R $SOURCE_DIR/$RELATIVE_DIR . ;"
 
-echo "$TIMESTAMP" >&3
+echo "$VERSION" >&3

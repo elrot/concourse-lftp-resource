@@ -1,6 +1,6 @@
 parse_source_config() {
   URL="$(jq -r '.source.url // ""' < "$PAYLOAD")"
-  VERSION="$(jq -r '.version.timestamp // ""' < "$PAYLOAD")"
+  VERSION="$(jq -r '.version.time // ""' < "$PAYLOAD")"
 }
 
 parse_out_params() {

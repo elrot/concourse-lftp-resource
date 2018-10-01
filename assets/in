@@ -17,6 +17,6 @@ parse_source_config
 
 jq -n "{
   version: {
-    timestamp: \"$VERSION\"
+    time: \"$VERSION\"
   }
 }" >&3
